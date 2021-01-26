@@ -1,0 +1,16 @@
+*.beam
+*.ez
+.elixir_ls/
+/*.ez
+/.fetch
+/_build
+/assets/node_modules
+/assets/node_modules/.cache
+/config/*.secret.exs
+/cover
+/db
+/deps
+/doc
+/priv/static/
+erl_crash.dump
+npm-debug.log
