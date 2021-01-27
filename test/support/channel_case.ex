@@ -20,10 +20,11 @@ defmodule RumblWeb.ChannelCase do
   using do
     quote do
       # Import conveniences for testing with channels
-      import Phoenix.ChannelTest
-      import RumblWeb.ChannelCase
+      use Phoenix.ConnTest
+      import Rumbl.TestHelpers
 
-      # The default endpoint for testing
+      alias RumblWeb.Router.Helpers, as: Routes
+
       @endpoint RumblWeb.Endpoint
     end
   end
