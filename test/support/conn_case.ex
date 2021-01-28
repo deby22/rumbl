@@ -22,11 +22,11 @@ defmodule RumblWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import RumblWeb.ConnCase
-
-      alias RumblWeb.Router.Helpers, as: Routes
+      # import RumblWeb.ConnCase
 
       # The default endpoint for testing
+      import Rumbl.TestHelpers
+      alias RumblWeb.Router.Helpers, as: Routes
       @endpoint RumblWeb.Endpoint
     end
   end
