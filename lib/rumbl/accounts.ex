@@ -3,8 +3,14 @@ defmodule Rumbl.Accounts do
   The accounts context.
   """
 
+  import Ecto.Query
   alias Rumbl.Repo
   alias Rumbl.Accounts.User
+
+  def list_users_with_ids(ids) do
+    # What if there is a lot of ids?
+    Repo.all(from(u in User, where: u.id in ^ids))
+  end
 
   def authenticate_by_username_and_pass(username, given_pass) do
     user = get_user_by(username: username)
