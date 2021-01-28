@@ -5,12 +5,17 @@ defmodule Rumbl.Multimedia.Annotation do
   schema "annotations" do
     field :at, :integer
     field :body, :string
-    field :user_id, :id
-    field :video_id, :id
+
+    belongs_to :user, Rumbl.Accounts.User
+    belongs_to :video, Rumbl.Multimedia.Video
 
     timestamps()
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Ecto.Changeset.t()
   @doc false
   def changeset(annotation, attrs) do
     annotation

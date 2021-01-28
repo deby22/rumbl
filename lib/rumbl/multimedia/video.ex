@@ -4,6 +4,7 @@ defmodule Rumbl.Multimedia.Video do
 
   @primary_key {:id, Rumbl.Multimedia.Permalink, autogenerate: true}
   schema "videos" do
+    has_many :annotations, Rumbl.Multimedia.Annotation
     field :description, :string
     field :title, :string
     field :url, :string
