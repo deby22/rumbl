@@ -7,6 +7,7 @@ defmodule RumblWeb.VideoChannel do
   def join("videos:" <> video_id, _params, socket) do
     video_id = String.to_integer(video_id)
     video = Multimedia.get_video!(video_id)
+
     annotations =
       video
       |> Multimedia.list_annotations()
@@ -20,7 +21,7 @@ defmodule RumblWeb.VideoChannel do
     handle_in(event, params, user, socket)
   end
 
-def handle_in("new_annotation", params, user, socket) do
+  def handle_in("new_annotation", params, user, socket) do
     case Multimedia.annotate_video(user, socket.assigns.video_id, params) do
       {:ok, annotation} ->
         broadcast!(socket, "new_annotation", %{
