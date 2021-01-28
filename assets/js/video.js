@@ -24,14 +24,19 @@ let Video = {
             msgInput.value = ""
         })
 
-
-        let vidChannel = socket.channel("videos:" + videoId)
+        let lastSeenId = 0
+        let vidChannel = socket.channel("videos:" + videoId, () => {
+            return {last_seen_id: lastSeenId}
+        })
         vidChannel.on("new_annotation", (resp) => {
+            lastSeenId = resp.id
             this.renderAnnotation(msgContainer, resp)
         })
         vidChannel.on("ping", ({ count }) => console.log("PING", count))
         vidChannel.join()
             .receive("ok", resp => {
+                let ids = resp.annotations.map(ann => ann.id)
+                if (ids.length > 0) {lastSeenId = Math.max(...ids)}
                 this.scheduleMessages(msgContainer, resp.annotations)
             })
             .receive("error", reason => console.log("Join failed", reason))
