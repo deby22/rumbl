@@ -6,5 +6,4 @@ defmodule RumblWeb.WatchView do
     |> Regex.named_captures(video.url)
     |> get_in(["id"])
   end
-
 end
